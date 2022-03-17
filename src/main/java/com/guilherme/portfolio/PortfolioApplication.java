@@ -23,4 +23,5 @@ public class PortfolioApplication {
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
