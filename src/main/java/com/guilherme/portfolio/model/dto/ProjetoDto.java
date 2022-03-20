@@ -1,10 +1,11 @@
-package com.guilherme.portfolio.controller.dto;
+package com.guilherme.portfolio.model.dto;
 
 import com.guilherme.portfolio.model.Projeto;
 import com.guilherme.portfolio.model.enuns.TecnologiasEnum;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class ProjetoDto {
 

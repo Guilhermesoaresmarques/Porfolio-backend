@@ -1,23 +1,24 @@
-package com.guilherme.portfolio.controller.form;
+package com.guilherme.portfolio.model.form;
 
 import com.guilherme.portfolio.model.Projeto;
+import com.guilherme.portfolio.model.enuns.SituacaoEnum;
 import com.guilherme.portfolio.model.enuns.TecnologiasEnum;
-import com.guilherme.portfolio.repository.ProjetoRepository;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class ProjetoAtualizadoForm {
+public class ProjetoForm {
 
     @NotNull @NotEmpty
     private String nome;
-
     @NotNull @NotEmpty
     private String descricao;
-
     @NotNull
     private TecnologiasEnum tecnologias;
-
+    @NotNull
+    private SituacaoEnum situacao;
+    @NotNull
+    private Boolean projetoDeTime;
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -31,15 +32,15 @@ public class ProjetoAtualizadoForm {
         this.tecnologias = tecnologias;
     }
 
-    public Projeto atualizar(Long id, ProjetoRepository repository) {
-        Projeto projeto = repository.getById(id);
+    public void setSituacao(SituacaoEnum situacao) {
+        this.situacao = situacao;
+    }
 
-        projeto.setNome(this.nome);
-        projeto.setDescricao(this.descricao);
-        projeto.setTecnologias(this.tecnologias);
+    public void setProjetoDeTime(Boolean projetoDeTime) {
+        this.projetoDeTime = projetoDeTime;
+    }
 
-        repository.save(projeto);
-
-        return projeto;
+    public Projeto converter() {
+        return new Projeto(this.nome, this.descricao, this.tecnologias, this.situacao, this.projetoDeTime);
     }
 }

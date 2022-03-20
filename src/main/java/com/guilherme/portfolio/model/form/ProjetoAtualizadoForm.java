@@ -1,24 +1,22 @@
-package com.guilherme.portfolio.controller.form;
+package com.guilherme.portfolio.model.form;
 
 import com.guilherme.portfolio.model.Projeto;
-import com.guilherme.portfolio.model.enuns.SituacaoEnum;
 import com.guilherme.portfolio.model.enuns.TecnologiasEnum;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class ProjetoForm {
+public class ProjetoAtualizadoForm {
 
     @NotNull @NotEmpty
     private String nome;
+
     @NotNull @NotEmpty
     private String descricao;
+
     @NotNull
     private TecnologiasEnum tecnologias;
-    @NotNull
-    private SituacaoEnum situacao;
-    @NotNull
-    private Boolean projetoDeTime;
+
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -32,15 +30,12 @@ public class ProjetoForm {
         this.tecnologias = tecnologias;
     }
 
-    public void setSituacao(SituacaoEnum situacao) {
-        this.situacao = situacao;
-    }
+    public Projeto converter(Projeto projeto) {
 
-    public void setProjetoDeTime(Boolean projetoDeTime) {
-        this.projetoDeTime = projetoDeTime;
-    }
+        projeto.setNome(this.nome);
+        projeto.setDescricao(this.descricao);
+        projeto.setTecnologias(this.tecnologias);
 
-    public Projeto converter() {
-        return new Projeto(this.nome, this.descricao, this.tecnologias, this.situacao, this.projetoDeTime);
+        return projeto;
     }
 }

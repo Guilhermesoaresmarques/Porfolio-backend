@@ -1,4 +1,4 @@
-package com.guilherme.portfolio.controller.form;
+package com.guilherme.portfolio.model.form;
 
 import lombok.Data;
 
