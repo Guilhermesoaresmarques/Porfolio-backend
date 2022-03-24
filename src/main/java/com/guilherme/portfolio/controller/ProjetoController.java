@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -44,7 +45,11 @@ public class ProjetoController {
     @GetMapping("/{id}")
     @Cacheable(value = "projetos")
     public ResponseEntity<ProjetoDto> projetoExpecifico(@PathVariable Long id) {
-       return service.getProjeto(id);
+        Projeto projeto = service.getProjeto(id);
+        if (projeto.getId() == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(new ProjetoDto(projeto));
     }
 
     @PostMapping
@@ -66,7 +71,7 @@ public class ProjetoController {
         Projeto projetoAtualizado = service.updateProjeto(form, id);
 
         if(projetoAtualizado == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok(new ProjetoDto(projetoAtualizado));
@@ -76,12 +81,12 @@ public class ProjetoController {
     @Transactional
     @CacheEvict(value = "projetos", allEntries = true)
     public ResponseEntity<?> removerProjeto(@PathVariable Long id) {
-        Optional<Projeto> optional = repository.findById(id);
-        if (optional.isPresent()) {
+        Optional<Projeto> projeto = repository.findById(id);
+        if (projeto.isPresent()) {
             service.deleteProjeto(id);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok("Projeto deletado");
         }
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest().build();
     }
 }
