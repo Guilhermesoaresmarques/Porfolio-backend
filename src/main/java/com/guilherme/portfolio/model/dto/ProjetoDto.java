@@ -1,25 +1,21 @@
 package com.guilherme.portfolio.model.dto;
 
 import com.guilherme.portfolio.model.Projeto;
-import com.guilherme.portfolio.model.enuns.TecnologiasEnum;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 public class ProjetoDto {
 
     private final Long id;
     private String nome;
     private final String descricao;
-    private final TecnologiasEnum tecnologias;
     private final LocalDateTime dataCriacao;
 
     public ProjetoDto(Projeto projeto) {
         this.id = projeto.getId();
         this.nome = projeto.getNome();
         this.descricao = projeto.getDescricao();
-        this.tecnologias = projeto.getTecnologias();
         this.dataCriacao = projeto.getDataCriacao();
 
     }
@@ -38,10 +34,6 @@ public class ProjetoDto {
 
     public String getDescricao() {
         return descricao;
-    }
-
-    public TecnologiasEnum getTecnologias() {
-        return tecnologias;
     }
 
     public LocalDateTime getDataCriacao() {

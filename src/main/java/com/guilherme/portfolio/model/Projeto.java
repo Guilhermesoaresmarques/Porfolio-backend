@@ -1,7 +1,6 @@
 package com.guilherme.portfolio.model;
 
 import com.guilherme.portfolio.model.enuns.SituacaoEnum;
-import com.guilherme.portfolio.model.enuns.TecnologiasEnum;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,17 +12,14 @@ public class Projeto {
     private Long id;
     private String nome;
     private String descricao;
-    @Enumerated(EnumType.STRING)
-    private TecnologiasEnum tecnologias;
     private LocalDateTime dataCriacao;
     @Enumerated(EnumType.STRING)
     private SituacaoEnum situacao;
     private Boolean projetoDeTime;
 
-    public Projeto(String nome, String descricao, TecnologiasEnum tecnologias, SituacaoEnum situacao, Boolean projetoDeTime) {
+    public Projeto(String nome, String descricao, SituacaoEnum situacao, Boolean projetoDeTime) {
         this.nome = nome;
         this.descricao = descricao;
-        this.tecnologias = tecnologias;
         this.dataCriacao = LocalDateTime.now();
         this.situacao = situacao;
         this.projetoDeTime = projetoDeTime;
@@ -44,9 +40,6 @@ public class Projeto {
         return descricao;
     }
 
-    public TecnologiasEnum getTecnologias() {
-        return tecnologias;
-    }
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
@@ -66,10 +59,6 @@ public class Projeto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public void setTecnologias(TecnologiasEnum tecnologias) {
-        this.tecnologias = tecnologias;
     }
 
 }

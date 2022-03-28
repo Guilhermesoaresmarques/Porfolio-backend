@@ -16,6 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
@@ -45,11 +46,9 @@ public class ProjetoController {
     @GetMapping("/{id}")
     @Cacheable(value = "projetos")
     public ResponseEntity<ProjetoDto> projetoExpecifico(@PathVariable Long id) {
-        Projeto projeto = service.getProjeto(id);
-        if (projeto.getId() == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(new ProjetoDto(projeto));
+        Optional<Projeto> projeto = service.getProjeto(id);
+        return projeto.map(value -> ResponseEntity.ok(
+                new ProjetoDto(value))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -65,16 +64,13 @@ public class ProjetoController {
     @PutMapping("/{id}")
     @Transactional
     @CacheEvict(value = "projetos", allEntries = true)
-    public ResponseEntity<ProjetoDto> atualizarProjeto(@PathVariable Long id,
-                                                       @RequestBody @Valid ProjetoAtualizadoForm form) {
+    public void atualizarProjeto(@PathVariable Long id,
+                                 @RequestBody @Valid ProjetoAtualizadoForm form) {
 
-        Projeto projetoAtualizado = service.updateProjeto(form, id);
+        Optional<Projeto> projeto = service.getProjeto(id);
 
-        if(projetoAtualizado == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        return ResponseEntity.ok(new ProjetoDto(projetoAtualizado));
+        projeto.map( projetoExiste -> service.updateProjeto(form, id))
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Projeto nao encontrado"));
     }
 
     @DeleteMapping("/{id}")

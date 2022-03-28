@@ -2,7 +2,6 @@ package com.guilherme.portfolio.model.form;
 
 import com.guilherme.portfolio.model.Projeto;
 import com.guilherme.portfolio.model.enuns.SituacaoEnum;
-import com.guilherme.portfolio.model.enuns.TecnologiasEnum;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -13,8 +12,6 @@ public class ProjetoForm {
     private String nome;
     @NotNull @NotEmpty
     private String descricao;
-    @NotNull
-    private TecnologiasEnum tecnologias;
     @NotNull
     private SituacaoEnum situacao;
     @NotNull
@@ -28,10 +25,6 @@ public class ProjetoForm {
         this.descricao = descricao;
     }
 
-    public void setTecnologias(TecnologiasEnum tecnologias) {
-        this.tecnologias = tecnologias;
-    }
-
     public void setSituacao(SituacaoEnum situacao) {
         this.situacao = situacao;
     }
@@ -41,6 +34,6 @@ public class ProjetoForm {
     }
 
     public Projeto converter() {
-        return new Projeto(this.nome, this.descricao, this.tecnologias, this.situacao, this.projetoDeTime);
+        return new Projeto(this.nome, this.descricao, this.situacao, this.projetoDeTime);
     }
 }

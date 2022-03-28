@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -20,8 +22,8 @@ public class ProjetoServiceImpl implements ProjetoService {
     private final ProjetoRepository repository;
 
     @Override
-    public Projeto getProjeto(Long id) {
-        return repository.getById(id);
+    public Optional<Projeto> getProjeto(Long id) {
+        return repository.findById(id);
     }
 
     @Override
@@ -37,12 +39,12 @@ public class ProjetoServiceImpl implements ProjetoService {
     }
 
     @Override
-    public Projeto updateProjeto(ProjetoAtualizadoForm form, Long id) {
+    public Optional<Projeto> updateProjeto(ProjetoAtualizadoForm form, Long id) {
 
         Projeto projetoProcurado = repository.getById(id);
         Projeto projeto = form.converter(projetoProcurado);
         repository.save(projeto);
-        return projeto;
+        return Optional.of(projeto);
     }
 
     @Override
