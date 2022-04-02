@@ -33,5 +33,17 @@ contar com autenticação e autorização de usuários com duas roles de autoriz
 - JWT
  
 ### Autor
-Guilherme Soares Marques
-
+##### Guilherme Soares Marques
+<div>
+	<a href="https://www.linkedin.com/in/guilherme-soares-marques-442555218/" target"_blank">
+		<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank">
+	</a>
+	
+	<a href="mailto:gsmguilhermemarques@gmail.com" target"_blank">
+		<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" target="_blank">
+	</a>
+	
+	<a href="https://t.me/GuilhermeMarq" target"_blank">
+		<img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" target="_blank">
+	</a>
+</div>
