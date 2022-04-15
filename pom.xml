@@ -8,7 +8,7 @@
 		<version>2.6.4</version>
 		<relativePath/>
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.guilherme.portfolio</groupId>
 	<artifactId>Portfolio-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>portfolio</name>
