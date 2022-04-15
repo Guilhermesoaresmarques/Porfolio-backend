@@ -5,6 +5,7 @@
       <option name="excludeList">
         <list>
           <option value="org.springframework.security:spring-security-crypto" />
+          <option value="com.auth0:java-jwt" />
         </list>
       </option>
     </inspection_tool>
